@@ -1,24 +1,21 @@
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
-const customFetch = (input: RequestInfo | URL, init?: RequestInit) => {
+const fetchWithAbortSignal = async (input: RequestInfo | URL, init?: RequestInit) => {
   const { signal } = init || {};
-
-  return fetch(input, { ...init, signal }).then((response) => {
-    if (response.ok) {
-      return response;
-    } else {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-  });
+  const response = await fetch(input, { ...init, signal });
+  if (response.ok) {
+    return response;
+  } else {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
 };
 
 const client = new ApolloClient({
   link: new HttpLink({
     uri: "https://rickandmortyapi.com/graphql",
-    fetch: customFetch,
+    fetch: fetchWithAbortSignal,
   }),
   cache: new InMemoryCache(),
-  queryDeduplication: false,
 });
 
 export default client;

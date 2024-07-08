@@ -3,7 +3,7 @@ import CharactersDropdown from "./CharactersDropdown";
 import { useSearch } from "@/lib/SearchContext";
 
 export default function ClientAutocomplete() {
-  const { searchTerm, setSearchTerm } = useSearch();
+  const { searchTerm, setSearchTerm, setIsActive, isActive } = useSearch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
@@ -11,15 +11,18 @@ export default function ClientAutocomplete() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-96">
       <input
+        name="autocomplete"
         type="text"
         value={searchTerm}
         onChange={handleChange}
-        className="border p-2"
+        onFocus={() => setIsActive(true)}
+        onBlur={() => setTimeout(() => setIsActive(false), 200)}
+        className="px-2 py-3 w-full text-lg rounded-lg border-2 border-gray-400 focus:border-gray-600 outline-none"
         placeholder="Search for a character..."
       />
-      {searchTerm && <CharactersDropdown />}
+      {searchTerm.length > 0 && isActive && <CharactersDropdown />}
     </div>
   );
 }
