@@ -36,8 +36,8 @@ import ClientAutocomplete from "@/components/ClientAutocomplete";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <h1 className="text-4xl mb-8">Rick and Morty Character Search</h1>
+    <main className="flex min-h-screen flex-col items-center sm:p-24 p-4 pt-10">
+      <h1 className="lg:text-4xl sm:text-3xl text-2xl mb-8 text-center">Rick and Morty Character Search</h1>
       <ClientAutocomplete />
     </main>
   );

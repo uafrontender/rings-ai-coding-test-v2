@@ -20,7 +20,7 @@ export default function ClientAutocomplete() {
         onFocus={() => setIsActive(true)}
         onBlur={() => setTimeout(() => setIsActive(false), 200)}
         className="px-2 py-3 w-full text-lg rounded-lg border-2 border-gray-400 focus:border-gray-600 outline-none"
-        placeholder="Search for a character..."
+        placeholder="Type to search for a character..."
       />
       {searchTerm.length > 0 && isActive && <CharactersDropdown />}
     </div>
