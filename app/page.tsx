@@ -32,10 +32,16 @@
  *
  */
 
+import ClientAutocomplete from "@/components/ClientAutocomplete";
+import { Suspense } from "react";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>hello....</div>
+    <main className="flex min-h-screen flex-col items-center p-24">
+      <h1 className="text-4xl mb-8">Rick and Morty Character Search</h1>
+      <Suspense fallback={<p>Loading feed...</p>}>
+        <ClientAutocomplete />
+      </Suspense>
     </main>
   );
 }
